@@ -51,6 +51,10 @@ export const Route = createFileRoute("/")({
 
 function Portfolio() {
   useEffect(() => {
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
       { threshold: 0.1 }
