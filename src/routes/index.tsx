@@ -685,11 +685,11 @@ function Contact() {
   );
 }
 
-function Field({ label, ...rest }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Field({ label, id, ...rest }: { label: string; id: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">{label}</label>
-      <input {...rest}
+      <label htmlFor={id} className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">{label}</label>
+      <input id={id} {...rest}
         className="mt-1.5 w-full rounded-lg bg-black/30 hairline px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--neon)]/40" />
     </div>
   );
