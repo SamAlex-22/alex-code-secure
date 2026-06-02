@@ -560,7 +560,7 @@ function Journey() {
               <span className="h-px flex-1 bg-white/10" />
               <span className="text-[10px] uppercase font-mono text-muted-foreground">milestone</span>
             </div>
-            <h4 className="mt-3 font-display text-base font-semibold">{t}</h4>
+            <h3 className="mt-3 font-display text-base font-semibold">{t}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{d}</p>
           </li>
         ))}
