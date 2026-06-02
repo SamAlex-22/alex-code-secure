@@ -616,12 +616,12 @@ function Contact() {
       <div className="grid lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 space-y-3 reveal">
           {[
-            { icon: Mail, label: "Email", v: "alex@samuelalexander.dev" },
+            { icon: Mail, label: "Email", v: "alexanderhere2005@gmail.com", href: "mailto:alexanderhere2005@gmail.com" },
             { icon: Github, label: "GitHub", v: "github.com/samuelalexander" },
             { icon: Linkedin, label: "LinkedIn", v: "linkedin.com/in/samuelalexander" },
             { icon: Shield, label: "TryHackMe", v: "tryhackme.com/p/samuelalexander" },
           ].map((c) => (
-            <a key={c.label} href="#"
+            <a key={c.label} href={c.href || "#"}
               className="flex items-center gap-3 glass rounded-xl p-4 hover:bg-white/5 transition group">
               <span className="grid h-10 w-10 place-items-center rounded-lg bg-[color:var(--neon)]/10 text-[color:var(--neon)]">
                 <c.icon className="h-5 w-5" />
