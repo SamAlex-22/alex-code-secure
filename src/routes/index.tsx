@@ -247,12 +247,18 @@ function About() {
 }
 
 function ProfileCard() {
+  // Replace the src below with your profile photo path, e.g. "/profile.jpg" or an external URL
+  const photoSrc = "";
   return (
     <div className="relative glass rounded-2xl p-6 overflow-hidden">
       <div className="absolute inset-0 dot-grid opacity-40" />
       <div className="relative flex items-center gap-4">
-        <div className="relative h-20 w-20 rounded-2xl bg-gradient-to-br from-[color:var(--neon)] to-[color:var(--cyber)] grid place-items-center font-display text-2xl font-bold text-background">
-          SA
+        <div className="relative h-20 w-20 rounded-2xl overflow-hidden bg-gradient-to-br from-[color:var(--neon)] to-[color:var(--cyber)] grid place-items-center font-display text-2xl font-bold text-background">
+          {photoSrc ? (
+            <img src={photoSrc} alt="Samuel Alexander" className="h-full w-full object-cover" />
+          ) : (
+            "SA"
+          )}
           <span className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full grid place-items-center bg-background border border-white/10">
             <Shield className="h-3 w-3 text-[color:var(--neon)]" />
           </span>
@@ -353,6 +359,7 @@ const PROJECTS = [
     features: ["Natural Language → KQL", "Multi-turn Conversations", "Security Dashboards", "Automated Reporting", "SOAR Integration"],
     stack: ["Python", "Django", "React", "AI"],
     icon: Sparkles,
+    href: "#",
   },
   {
     title: "LeetCode Clone Platform", tag: "Full-stack · Sandbox",
@@ -360,6 +367,7 @@ const PROJECTS = [
     features: ["Multi-language Execution", "Secure Sandbox", "Leaderboards", "User Profiles", "Real-time Judging"],
     stack: ["React", "Django", "Redis", "Docker"],
     icon: Code2,
+    href: "#",
   },
   {
     title: "IoT Crash Detection System", tag: "Embedded · Safety",
@@ -367,6 +375,7 @@ const PROJECTS = [
     features: ["Sensor Fusion", "Emergency Alerts", "Low-latency", "GPS Aware"],
     stack: ["ESP32", "Sensors", "Embedded"],
     icon: Cpu,
+    href: "#",
   },
   {
     title: "Smart Pill Dispenser", tag: "Embedded · Health",
@@ -374,6 +383,7 @@ const PROJECTS = [
     features: ["Scheduled Dispensing", "RTC Sync", "Servo Control", "Alerts"],
     stack: ["ESP32", "RTC", "Servo"],
     icon: Container,
+    href: "#",
   },
 ];
 
@@ -383,8 +393,8 @@ function Projects() {
       subtitle="Shipping security-focused tooling and full-stack systems end-to-end.">
       <div className="grid md:grid-cols-2 gap-5">
         {PROJECTS.map((p) => (
-          <article key={p.title}
-            className="reveal group relative glass rounded-2xl p-6 overflow-hidden hover:-translate-y-0.5 transition">
+          <a key={p.title} href={p.href} target="_blank" rel="noopener noreferrer"
+            className="reveal group relative glass rounded-2xl p-6 overflow-hidden hover:-translate-y-0.5 transition block">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
               style={{ background: "radial-gradient(400px 200px at 0% 0%, color-mix(in oklab, var(--neon) 18%, transparent), transparent)" }} />
             <div className="relative flex items-start justify-between gap-4">
@@ -409,7 +419,7 @@ function Projects() {
                 <span key={s} className="rounded-md bg-white/5 px-2 py-1 text-[10px] font-mono text-muted-foreground hairline">{s}</span>
               ))}
             </div>
-          </article>
+          </a>
         ))}
       </div>
     </Section>
@@ -461,11 +471,11 @@ function Research() {
 
 /* ---------- Certifications ---------- */
 const CERTS = [
-  { t: "TryHackMe — Web Fundamentals", issuer: "TryHackMe", pct: 100 },
-  { t: "TryHackMe — Metasploit Badge", issuer: "TryHackMe", pct: 100 },
-  { t: "Junior Penetration Tester Path", issuer: "TryHackMe", pct: 85 },
-  { t: "Google AI for App Building", issuer: "Google", pct: 100 },
-  { t: "Intro to Cyber Security Careers", issuer: "Cisco", pct: 100 },
+  { t: "TryHackMe — Web Fundamentals", issuer: "TryHackMe", pct: 100, href: "#" },
+  { t: "TryHackMe — Metasploit Badge", issuer: "TryHackMe", pct: 100, href: "#" },
+  { t: "Junior Penetration Tester Path", issuer: "TryHackMe", pct: 85, href: "#" },
+  { t: "Google AI for App Building", issuer: "Google", pct: 100, href: "#" },
+  { t: "Intro to Cyber Security Careers", issuer: "Cisco", pct: 100, href: "#" },
 ];
 
 function Certifications() {
@@ -474,7 +484,8 @@ function Certifications() {
       subtitle="Continuous learning across offensive security and modern engineering.">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {CERTS.map((c) => (
-          <div key={c.t} className="reveal glass rounded-2xl p-5 relative overflow-hidden">
+          <a key={c.t} href={c.href} target="_blank" rel="noopener noreferrer"
+            className="reveal glass rounded-2xl p-5 relative overflow-hidden block hover:bg-white/5 transition">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground">{c.issuer}</div>
@@ -493,7 +504,7 @@ function Certifications() {
                 <div className="h-full rounded-full" style={{ width: `${c.pct}%`, background: "linear-gradient(90deg, var(--neon), var(--cyber))" }} />
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </Section>
