@@ -387,8 +387,8 @@ function Projects() {
       subtitle="Shipping security-focused tooling and full-stack systems end-to-end.">
       <div className="grid md:grid-cols-2 gap-5">
         {PROJECTS.map((p) => (
-          <article key={p.title}
-            className="reveal group relative glass rounded-2xl p-6 overflow-hidden hover:-translate-y-0.5 transition">
+          <a key={p.title} href={p.href} target="_blank" rel="noopener noreferrer"
+            className="reveal group relative glass rounded-2xl p-6 overflow-hidden hover:-translate-y-0.5 transition block">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition"
               style={{ background: "radial-gradient(400px 200px at 0% 0%, color-mix(in oklab, var(--neon) 18%, transparent), transparent)" }} />
             <div className="relative flex items-start justify-between gap-4">
@@ -413,7 +413,7 @@ function Projects() {
                 <span key={s} className="rounded-md bg-white/5 px-2 py-1 text-[10px] font-mono text-muted-foreground hairline">{s}</span>
               ))}
             </div>
-          </article>
+          </a>
         ))}
       </div>
     </Section>
