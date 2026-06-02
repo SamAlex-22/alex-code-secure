@@ -667,12 +667,12 @@ function Contact() {
             <Lock className="h-3.5 w-3.5 text-[color:var(--cyber)]" />
             encrypted message · TLS 1.3
           </div>
-          <Field label="Name" placeholder="Your name" />
-          <Field label="Email" placeholder="you@domain.com" type="email" />
-          <Field label="Subject" placeholder="Security assessment / collaboration" />
+          <Field id="contact-name" label="Name" placeholder="Your name" />
+          <Field id="contact-email" label="Email" placeholder="you@domain.com" type="email" />
+          <Field id="contact-subject" label="Subject" placeholder="Security assessment / collaboration" />
           <div>
-            <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Message</label>
-            <textarea rows={5} placeholder="Tell me about the scope, timeline, and goals..."
+            <label htmlFor="contact-message" className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Message</label>
+            <textarea id="contact-message" rows={5} placeholder="Tell me about the scope, timeline, and goals..."
               className="mt-1.5 w-full rounded-lg bg-black/30 hairline px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--neon)]/40" />
           </div>
           <button type="submit"
