@@ -714,8 +714,13 @@ function Footer() {
           ))}
         </div>
         <div className="flex md:justify-end gap-3">
-          {[Github, Linkedin, Mail].map((Icon, i) => (
-            <a key={i} href="#" className="grid h-10 w-10 place-items-center rounded-lg glass hover:bg-white/5 transition">
+          {[
+            { Icon: Github, label: "GitHub", href: "#" },
+            { Icon: Linkedin, label: "LinkedIn", href: "#" },
+            { Icon: Mail, label: "Email", href: "mailto:alexanderhere2005@gmail.com" },
+          ].map(({ Icon, label, href }) => (
+            <a key={label} href={href} aria-label={label}
+              className="grid h-10 w-10 place-items-center rounded-lg glass hover:bg-white/5 transition">
               <Icon className="h-4 w-4" />
             </a>
           ))}
