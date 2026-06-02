@@ -1,0 +1,7 @@
+# Samuel Alexander
+
+> Portfolio of Samuel Alexander (Alex) — cybersecurity student, penetration tester, backend developer, and security researcher.
+
+## Pages
+
+- [Home](/): Overview of skills, projects, research, certifications, and contact.

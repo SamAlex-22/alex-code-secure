@@ -18,6 +18,32 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Samuel Alexander — Security Engineer Portfolio" },
       { property: "og:description", content: "Securing applications. Building solutions. Breaking assumptions." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://alex-code-secure.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://alex-code-secure.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Samuel Alexander",
+          alternateName: "Alex",
+          jobTitle: "Penetration Tester & Backend Developer",
+          url: "https://alex-code-secure.lovable.app",
+          email: "mailto:alexanderhere2005@gmail.com",
+          knowsAbout: [
+            "Penetration Testing",
+            "Web Application Security",
+            "API Security",
+            "Android Security",
+            "Backend Development",
+            "Vulnerability Research",
+          ],
+        }),
+      },
     ],
   }),
   component: Portfolio,
@@ -128,6 +154,7 @@ function Hero() {
             Available for security engagements · 2026
           </div>
           <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight">
+            <span className="sr-only">Samuel Alexander — </span>
             <span className="text-gradient">Securing applications.</span><br />
             <span className="text-gradient">Building solutions.</span><br />
             <span className="text-neon-gradient">Breaking assumptions.</span>
@@ -489,7 +516,7 @@ function Certifications() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground">{c.issuer}</div>
-                <h4 className="mt-1 font-medium leading-snug">{c.t}</h4>
+                <h3 className="mt-1 font-medium leading-snug">{c.t}</h3>
               </div>
               <span className="grid h-10 w-10 place-items-center rounded-lg bg-[color:var(--neon)]/10 text-[color:var(--neon)] shrink-0">
                 <Award className="h-5 w-5" />
@@ -533,7 +560,7 @@ function Journey() {
               <span className="h-px flex-1 bg-white/10" />
               <span className="text-[10px] uppercase font-mono text-muted-foreground">milestone</span>
             </div>
-            <h4 className="mt-3 font-display text-base font-semibold">{t}</h4>
+            <h3 className="mt-3 font-display text-base font-semibold">{t}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{d}</p>
           </li>
         ))}
@@ -596,7 +623,7 @@ function Blog() {
               </span>
               <span className="text-[10px] font-mono text-muted-foreground">draft</span>
             </div>
-            <h4 className="mt-4 font-display text-lg font-semibold">{b.t}</h4>
+            <h3 className="mt-4 font-display text-lg font-semibold">{b.t}</h3>
             <div className="mt-6 flex items-center gap-1.5 text-xs text-muted-foreground">
               <BookOpen className="h-3.5 w-3.5" /> Read soon
               <ArrowUpRight className="h-3.5 w-3.5 ml-auto opacity-0 group-hover:opacity-100 transition" />
@@ -640,12 +667,12 @@ function Contact() {
             <Lock className="h-3.5 w-3.5 text-[color:var(--cyber)]" />
             encrypted message · TLS 1.3
           </div>
-          <Field label="Name" placeholder="Your name" />
-          <Field label="Email" placeholder="you@domain.com" type="email" />
-          <Field label="Subject" placeholder="Security assessment / collaboration" />
+          <Field id="contact-name" label="Name" placeholder="Your name" />
+          <Field id="contact-email" label="Email" placeholder="you@domain.com" type="email" />
+          <Field id="contact-subject" label="Subject" placeholder="Security assessment / collaboration" />
           <div>
-            <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Message</label>
-            <textarea rows={5} placeholder="Tell me about the scope, timeline, and goals..."
+            <label htmlFor="contact-message" className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Message</label>
+            <textarea id="contact-message" rows={5} placeholder="Tell me about the scope, timeline, and goals..."
               className="mt-1.5 w-full rounded-lg bg-black/30 hairline px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--neon)]/40" />
           </div>
           <button type="submit"
@@ -658,11 +685,11 @@ function Contact() {
   );
 }
 
-function Field({ label, ...rest }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Field({ label, id, ...rest }: { label: string; id: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">{label}</label>
-      <input {...rest}
+      <label htmlFor={id} className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">{label}</label>
+      <input id={id} {...rest}
         className="mt-1.5 w-full rounded-lg bg-black/30 hairline px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--neon)]/40" />
     </div>
   );
@@ -687,8 +714,13 @@ function Footer() {
           ))}
         </div>
         <div className="flex md:justify-end gap-3">
-          {[Github, Linkedin, Mail].map((Icon, i) => (
-            <a key={i} href="#" className="grid h-10 w-10 place-items-center rounded-lg glass hover:bg-white/5 transition">
+          {[
+            { Icon: Github, label: "GitHub", href: "#" },
+            { Icon: Linkedin, label: "LinkedIn", href: "#" },
+            { Icon: Mail, label: "Email", href: "mailto:alexanderhere2005@gmail.com" },
+          ].map(({ Icon, label, href }) => (
+            <a key={label} href={href} aria-label={label}
+              className="grid h-10 w-10 place-items-center rounded-lg glass hover:bg-white/5 transition">
               <Icon className="h-4 w-4" />
             </a>
           ))}
