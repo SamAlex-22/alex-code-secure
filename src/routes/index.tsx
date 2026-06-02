@@ -18,6 +18,32 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Samuel Alexander — Security Engineer Portfolio" },
       { property: "og:description", content: "Securing applications. Building solutions. Breaking assumptions." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://alex-code-secure.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://alex-code-secure.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Samuel Alexander",
+          alternateName: "Alex",
+          jobTitle: "Penetration Tester & Backend Developer",
+          url: "https://alex-code-secure.lovable.app",
+          email: "mailto:alexanderhere2005@gmail.com",
+          knowsAbout: [
+            "Penetration Testing",
+            "Web Application Security",
+            "API Security",
+            "Android Security",
+            "Backend Development",
+            "Vulnerability Research",
+          ],
+        }),
+      },
     ],
   }),
   component: Portfolio,
