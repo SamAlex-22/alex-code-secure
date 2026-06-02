@@ -353,6 +353,7 @@ const PROJECTS = [
     features: ["Natural Language → KQL", "Multi-turn Conversations", "Security Dashboards", "Automated Reporting", "SOAR Integration"],
     stack: ["Python", "Django", "React", "AI"],
     icon: Sparkles,
+    href: "#",
   },
   {
     title: "LeetCode Clone Platform", tag: "Full-stack · Sandbox",
@@ -360,6 +361,7 @@ const PROJECTS = [
     features: ["Multi-language Execution", "Secure Sandbox", "Leaderboards", "User Profiles", "Real-time Judging"],
     stack: ["React", "Django", "Redis", "Docker"],
     icon: Code2,
+    href: "#",
   },
   {
     title: "IoT Crash Detection System", tag: "Embedded · Safety",
@@ -367,6 +369,7 @@ const PROJECTS = [
     features: ["Sensor Fusion", "Emergency Alerts", "Low-latency", "GPS Aware"],
     stack: ["ESP32", "Sensors", "Embedded"],
     icon: Cpu,
+    href: "#",
   },
   {
     title: "Smart Pill Dispenser", tag: "Embedded · Health",
@@ -374,6 +377,7 @@ const PROJECTS = [
     features: ["Scheduled Dispensing", "RTC Sync", "Servo Control", "Alerts"],
     stack: ["ESP32", "RTC", "Servo"],
     icon: Container,
+    href: "#",
   },
 ];
 
