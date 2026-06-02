@@ -623,7 +623,7 @@ function Blog() {
               </span>
               <span className="text-[10px] font-mono text-muted-foreground">draft</span>
             </div>
-            <h4 className="mt-4 font-display text-lg font-semibold">{b.t}</h4>
+            <h3 className="mt-4 font-display text-lg font-semibold">{b.t}</h3>
             <div className="mt-6 flex items-center gap-1.5 text-xs text-muted-foreground">
               <BookOpen className="h-3.5 w-3.5" /> Read soon
               <ArrowUpRight className="h-3.5 w-3.5 ml-auto opacity-0 group-hover:opacity-100 transition" />
