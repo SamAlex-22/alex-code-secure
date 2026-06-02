@@ -478,7 +478,8 @@ function Certifications() {
       subtitle="Continuous learning across offensive security and modern engineering.">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {CERTS.map((c) => (
-          <div key={c.t} className="reveal glass rounded-2xl p-5 relative overflow-hidden">
+          <a key={c.t} href={c.href} target="_blank" rel="noopener noreferrer"
+            className="reveal glass rounded-2xl p-5 relative overflow-hidden block hover:bg-white/5 transition">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground">{c.issuer}</div>
@@ -497,7 +498,7 @@ function Certifications() {
                 <div className="h-full rounded-full" style={{ width: `${c.pct}%`, background: "linear-gradient(90deg, var(--neon), var(--cyber))" }} />
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </Section>
