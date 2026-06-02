@@ -516,7 +516,7 @@ function Certifications() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground">{c.issuer}</div>
-                <h4 className="mt-1 font-medium leading-snug">{c.t}</h4>
+                <h3 className="mt-1 font-medium leading-snug">{c.t}</h3>
               </div>
               <span className="grid h-10 w-10 place-items-center rounded-lg bg-[color:var(--neon)]/10 text-[color:var(--neon)] shrink-0">
                 <Award className="h-5 w-5" />
