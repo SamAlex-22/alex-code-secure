@@ -154,6 +154,7 @@ function Hero() {
             Available for security engagements · 2026
           </div>
           <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight">
+            <span className="sr-only">Samuel Alexander — </span>
             <span className="text-gradient">Securing applications.</span><br />
             <span className="text-gradient">Building solutions.</span><br />
             <span className="text-neon-gradient">Breaking assumptions.</span>
