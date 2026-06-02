@@ -465,11 +465,11 @@ function Research() {
 
 /* ---------- Certifications ---------- */
 const CERTS = [
-  { t: "TryHackMe — Web Fundamentals", issuer: "TryHackMe", pct: 100 },
-  { t: "TryHackMe — Metasploit Badge", issuer: "TryHackMe", pct: 100 },
-  { t: "Junior Penetration Tester Path", issuer: "TryHackMe", pct: 85 },
-  { t: "Google AI for App Building", issuer: "Google", pct: 100 },
-  { t: "Intro to Cyber Security Careers", issuer: "Cisco", pct: 100 },
+  { t: "TryHackMe — Web Fundamentals", issuer: "TryHackMe", pct: 100, href: "#" },
+  { t: "TryHackMe — Metasploit Badge", issuer: "TryHackMe", pct: 100, href: "#" },
+  { t: "Junior Penetration Tester Path", issuer: "TryHackMe", pct: 85, href: "#" },
+  { t: "Google AI for App Building", issuer: "Google", pct: 100, href: "#" },
+  { t: "Intro to Cyber Security Careers", issuer: "Cisco", pct: 100, href: "#" },
 ];
 
 function Certifications() {
