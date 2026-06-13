@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Shield, Terminal, Code2, Bug, Lock, Server, Cloud, Cpu, Github, Linkedin, Mail,
   ArrowUpRight, ChevronRight, Sparkles, Activity, Globe, Smartphone, Database,
@@ -337,7 +338,7 @@ const SKILLS = [
     icon: Wrench, title: "Security Tools",
     items: [
       ["Burp Suite", 92], ["Nmap", 90], ["Wireshark", 80], ["Metasploit", 78],
-      ["SQLMap", 85], ["Gobuster / FFUF", 82], ["Hashcat / John", 78], ["Frida / Objection", 75],
+      ["SQLMap", 85], ["Gobuster / FFUF", 82], ["Hashcat / John", 78], ["Frida / Objection", 60],
     ],
   },
   {
@@ -406,7 +407,7 @@ const PROJECTS = [
     features: ["Sensor Fusion", "Emergency Alerts", "Low-latency", "GPS Aware"],
     stack: ["ESP32", "Sensors", "Embedded"],
     icon: Cpu,
-    href: "#",
+    href: "https://github.com/SamAlex-22/Bike-Crash-Detection-System---IOT",
   },
   {
     title: "Smart Pill Dispenser", tag: "Embedded · Health",
@@ -414,7 +415,7 @@ const PROJECTS = [
     features: ["Scheduled Dispensing", "RTC Sync", "Servo Control", "Alerts"],
     stack: ["ESP32", "RTC", "Servo"],
     icon: Container,
-    href: "#",
+    href: "https://github.com/SamAlex-22/Smart-Pill-Dispenser/tree/main",
   },
 ];
 
@@ -575,7 +576,7 @@ function Journey() {
 
 /* ---------- Stats ---------- */
 const STATS = [
-  { label: "Security Labs Completed", v: 120, suffix: "+" },
+  { label: "Security Labs Completed", v: 130, suffix: "+" },
   { label: "Vulnerabilities Identified", v: 45, suffix: "+" },
   { label: "Projects Built", v: 18 },
   { label: "Technologies Learned", v: 30, suffix: "+" },
@@ -648,11 +649,13 @@ function Contact() {
         <div className="lg:col-span-2 space-y-3 reveal">
           {[
             { icon: Mail, label: "Email", v: "alexanderhere2005@gmail.com", href: "mailto:alexanderhere2005@gmail.com" },
-            { icon: Github, label: "GitHub", v: "github.com/samuelalexander" },
-            { icon: Linkedin, label: "LinkedIn", v: "linkedin.com/in/samuelalexander" },
-            { icon: Shield, label: "TryHackMe", v: "tryhackme.com/p/samuelalexander" },
+            { icon: Github, label: "GitHub", v: "github.com/SamAlex-22", href: "https://github.com/SamAlex-22" },
+            { icon: Linkedin, label: "LinkedIn", v: "linkedin.com/in/samuel-alexander-v", href: "https://www.linkedin.com/in/samuel-alexander-v-2b25712a5/" },
+            { icon: Shield, label: "TryHackMe", v: "tryhackme.com/p/SamAlex", href: "https://tryhackme.com/p/SamAlex" },
           ].map((c) => (
-            <a key={c.label} href={c.href || "#"}
+            <a key={c.label} href={c.href}
+              target={c.href.startsWith("http") ? "_blank" : undefined}
+              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="flex items-center gap-3 glass rounded-xl p-4 hover:bg-white/5 transition group">
               <span className="grid h-10 w-10 place-items-center rounded-lg bg-[color:var(--neon)]/10 text-[color:var(--neon)]">
                 <c.icon className="h-5 w-5" />
@@ -665,27 +668,56 @@ function Contact() {
             </a>
           ))}
         </div>
-        <form className="lg:col-span-3 glass rounded-2xl p-6 reveal space-y-4"
-          onSubmit={(e) => e.preventDefault()}>
-          <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground border-b border-white/5 pb-3">
-            <Lock className="h-3.5 w-3.5 text-[color:var(--cyber)]" />
-            encrypted message · TLS 1.3
-          </div>
-          <Field id="contact-name" label="Name" placeholder="Your name" />
-          <Field id="contact-email" label="Email" placeholder="you@domain.com" type="email" />
-          <Field id="contact-subject" label="Subject" placeholder="Security assessment / collaboration" />
-          <div>
-            <label htmlFor="contact-message" className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Message</label>
-            <textarea id="contact-message" rows={5} placeholder="Tell me about the scope, timeline, and goals..."
-              className="mt-1.5 w-full rounded-lg bg-black/30 hairline px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--neon)]/40" />
-          </div>
-          <button type="submit"
-            className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-medium bg-[color:var(--neon)] text-primary-foreground hover:shadow-[var(--shadow-glow)] transition">
-            Send Secure Message <Send className="h-4 w-4" />
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </Section>
+  );
+}
+
+// Replace these with your actual EmailJS credentials from https://emailjs.com
+const EMAILJS_SERVICE_ID = "service_jii5hd9";
+const EMAILJS_TEMPLATE_ID = "template_a3c3qms";
+const EMAILJS_PUBLIC_KEY = "9jz6XMpbVoFLK6vDq";
+
+function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+    setStatus("sending");
+    try {
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY);
+      setStatus("sent");
+      formRef.current.reset();
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <form ref={formRef} className="lg:col-span-3 glass rounded-2xl p-6 reveal space-y-4" onSubmit={handleSubmit}>
+      <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground border-b border-white/5 pb-3">
+        <Lock className="h-3.5 w-3.5 text-[color:var(--cyber)]" />
+        encrypted message · TLS 1.3
+      </div>
+      <Field id="contact-name" name="from_name" label="Name" placeholder="Your name" required />
+      <Field id="contact-email" name="from_email" label="Email" placeholder="you@domain.com" type="email" required />
+      <Field id="contact-subject" name="subject" label="Subject" placeholder="Security assessment / collaboration" required />
+      <div>
+        <label htmlFor="contact-message" className="text-[10px] uppercase tracking-widest font-mono text-muted-foreground">Message</label>
+        <textarea id="contact-message" name="message" rows={5} placeholder="Tell me about the scope, timeline, and goals..."
+          className="mt-1.5 w-full rounded-lg bg-black/30 hairline px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[color:var(--neon)]/40"
+          required />
+      </div>
+      {status === "sent" && <p className="text-xs text-[color:var(--cyber)] font-mono">✓ Message sent — I'll get back to you soon.</p>}
+      {status === "error" && <p className="text-xs text-red-400 font-mono">✗ Failed to send. Please email me directly.</p>}
+      <button type="submit" disabled={status === "sending"}
+        className="inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-medium bg-[color:var(--neon)] text-primary-foreground hover:shadow-[var(--shadow-glow)] transition disabled:opacity-60">
+        {status === "sending" ? "Sending…" : "Send Secure Message"} <Send className="h-4 w-4" />
+      </button>
+    </form>
   );
 }
 
@@ -719,11 +751,11 @@ function Footer() {
         </div>
         <div className="flex md:justify-end gap-3">
           {[
-            { Icon: Github, label: "GitHub", href: "#" },
-            { Icon: Linkedin, label: "LinkedIn", href: "#" },
+            { Icon: Github, label: "GitHub", href: "https://github.com/SamAlex-22" },
+            { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/samuel-alexander-v-2b25712a5/" },
             { Icon: Mail, label: "Email", href: "mailto:alexanderhere2005@gmail.com" },
           ].map(({ Icon, label, href }) => (
-            <a key={label} href={href} aria-label={label}
+            <a key={label} href={href} aria-label={label} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="grid h-10 w-10 place-items-center rounded-lg glass hover:bg-white/5 transition">
               <Icon className="h-4 w-4" />
             </a>
